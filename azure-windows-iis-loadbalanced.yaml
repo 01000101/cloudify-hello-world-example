@@ -291,7 +291,7 @@ node_templates:
       target: vm
       
   vm_webapp:
-    type: cloudify.nodes.WebApplication
+    type: cloudify.nodes.ApplicationModule
     interfaces:
       cloudify.interfaces.lifecycle:
         start: scripts/configure.py

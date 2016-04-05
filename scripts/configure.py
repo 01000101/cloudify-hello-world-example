@@ -19,23 +19,37 @@
     Configures the Cloudify test web application
 '''
 
-from os import remove
+import os
+import shutil
 from cloudify import ctx
 
 IIS_DEF_DIR = 'C:\\inetpub\\wwwroot\\'
 
 
+def remove_folder_contents(folder):
+    '''Removes all files and folders from a folder'''
+    if not os.path.isdir(folder):
+        return
+    for fs_item in os.listdir(folder):
+        file_path = os.path.join(folder, fs_item)
+        ctx.logger.debug('Removing file/folder "{0}"'.format(file_path))
+        try:
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except OSError as exc:
+            ctx.logger.warn('Could not delete file / folder: {0}'
+                            .format(str(exc)))
+
+
 def main():
     '''Entry point'''
     ctx.logger.info('Removing default IIS web application')
-    remove('{0}{1}'.format(IIS_DEF_DIR, 'iisstart.htm'))
+    remove_folder_contents(IIS_DEF_DIR)
     ctx.logger.info('Downloading web application to {0}'.format(IIS_DEF_DIR))
     ctx.download_resource_and_render('index.html',
-                                     '{0}{1}'.format(
-                                         IIS_DEF_DIR, 'index.html'))
-    ctx.download_resource_and_render('images/cloudify-logo.png',
-                                     '{0}{1}'.format(
-                                         IIS_DEF_DIR, 'cloudify-logo.png'))
+                                     os.path.join(IIS_DEF_DIR, 'index.html'))
 
 
 main()

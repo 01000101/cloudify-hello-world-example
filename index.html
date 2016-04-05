@@ -1,14 +1,41 @@
-<html>
-    <header>
-        <title>Cloudify Hello World</title>
-    </header>
-<body>
-    <h1>Hello, World!</h1>
-    <p>
-        blueprint_id = {{ ctx.blueprint.id }}<br/>
-        deployment_id = {{ ctx.deployment.id }}<br/>
-        node_id = {{ ctx.node.id }}
-    </p>
-    <img src="cloudify-logo.png">
-</body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello, Cloudify</title>
+
+    <!-- Bootstrap styles -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+          crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="jumbotron text-center">
+          <img src="http://docs.getcloudify.org/api/images/logo.png"
+               class="img-responsive center-block" />
+          <h2>This web app was deployed using Cloudify!</h2>
+          <div class="row" style="padding-top: 30px; padding-bottom: 20px;">
+            <p>Blueprint ID: <strong>{{ ctx.blueprint.id }}</strong></p>
+            <p>Deployment ID: <strong>{{ ctx.deployment.id }}</strong></p>
+            <p>Node ID: <strong>{{ ctx.node.id }}</strong></p>
+          </div>
+          <p>
+            <a class="btn btn-primary btn-lg"
+               href="http://docs.getcloudify.org/"
+               role="button">
+              Learn more
+            </a>
+          </p>
+        </div>
+      </div>
+      <div class="row text-center">
+        &copy; GigaSpaces Technologies 2016, All Rights Reserved
+      </div>
+    </div>
+  </body>
 </html>
